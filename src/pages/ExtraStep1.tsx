@@ -51,8 +51,8 @@ function ExtraStep1() {
   const inputError = answer !== "" && !hiraganaRegex.test(answer)
 
   const handleSubmit = () => {
-    if (answer === "おまけなぞ") {
-      navigate("/extra-step2?nazo=おまけ謎")
+    if (answer === "きかい") {
+      navigate("/extra-step2?place=ボタン式制御室")
     } else {
       setWrongAnswerError("答えが違うみたいです")
     }
