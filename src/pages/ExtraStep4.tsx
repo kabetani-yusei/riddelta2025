@@ -9,7 +9,10 @@ function ExtraStep4() {
   const [wrongAnswerError, setWrongAnswerError] = useState("");
 
   // 出題文
-  const question = "以下の謎を解け";
+  const question = pushed
+    ? "本公演のハッシュタグは？"
+    : "譁�ｭ怜喧縺代ヱ繧ｿ繝ｼ繝ｳ";
+
 
   const handleSubmit = () => {
     if (
@@ -44,7 +47,11 @@ function ExtraStep4() {
           おまけ謎
         </Typography>
         <Typography variant="body1" gutterBottom>
-          {question}
+          以下の問に答えよ
+          <br />
+          <Box component="h1" fontWeight="bold">
+            {question}
+          </Box>
         </Typography>
         {/* ○をテキストフィールド上に配置 */}
         <Box mt={2} display="flex" justifyContent="space-around">

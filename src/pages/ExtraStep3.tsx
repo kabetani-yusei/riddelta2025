@@ -68,11 +68,13 @@ function ExtraStep3() {
           おまけ謎
         </Typography>
         <Typography variant="body1" gutterBottom>
-          次の暗号を解読してください：{' '}
-          <Box component="span" fontWeight="bold">
-            ひらがな→カタカナ変換
+          以下の問に答えよ
+          <br />
+          <Box component="h1" fontWeight="bold">
+            譁�ｭ怜喧縺代ヱ繧ｿ繝ｼ繝ｳ
           </Box>
         </Typography>
+
         {/* ○をテキストフィールド上に配置 */}
         <Box mt={2} display="flex" justifyContent="space-around">
           {colors.map((color, idx) => (
