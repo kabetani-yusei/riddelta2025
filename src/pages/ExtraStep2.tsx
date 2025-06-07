@@ -15,7 +15,7 @@ function ExtraStep2() {
   const [buttonMessage, setButtonMessage] = useState("")
 
   // placeParamチェック - シャワー室の場合
-  if (placeParam === "シャワー室") {
+  if (placeParam?.includes("シャワー")) {
     return (
       <Box
         sx={{
