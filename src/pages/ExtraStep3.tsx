@@ -141,8 +141,8 @@ function ExtraStep3() {
                 <Chip
                   label="EXTRA"
                   sx={{
-                    background: "linear-gradient(45deg, #2563eb, #1d4ed8)",
-                    color: "white",
+                    background: "linear-gradient(45deg, #d4af37, #ffd700)",
+                    color: "#1e40af",
                     fontWeight: "bold",
                   }}
                 />
