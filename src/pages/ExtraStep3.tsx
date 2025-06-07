@@ -47,6 +47,20 @@ function ExtraStep3() {
     }
   };
 
+  // 色リスト
+  const colors = [
+    "#fff", // 白
+    "#ff0", // 黄
+    "#ffa500", // 橙
+    "#000", // 黒
+    "#00f", // 青
+    "#0ff", // 水色
+    "#0f0", // 緑
+    "#f00", // 赤
+    "#a52a2a", // 茶
+    "#808080" // 灰
+  ];
+
   return (
     <Container maxWidth="sm" sx={{ mt: 8, mb: 8 }}>
       <Paper elevation={3} sx={{ p: 4, borderRadius: 2 }}>
@@ -59,7 +73,22 @@ function ExtraStep3() {
             ひらがな→カタカナ変換
           </Box>
         </Typography>
-        {/* 回答入力 */}
+        {/* ○をテキストフィールド上に配置 */}
+        <Box mt={2} display="flex" justifyContent="space-around">
+          {colors.map((color, idx) => (
+            <Box
+              key={idx}
+              sx={{
+                width: 32,
+                height: 32,
+                bgcolor: color,
+                borderRadius: '50%',
+                border: '1px solid #000',
+                boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.3)'
+              }}
+            />
+          ))}
+        </Box>
         <Box mt={3}>
           <TextField
             label="回答"
@@ -74,7 +103,6 @@ function ExtraStep3() {
             helperText={wrongAnswerError || '\u00A0'}
           />
         </Box>
-        {/* 解答するボタンを下側に配置 */}
         <Box mt={2} textAlign="center">
           <Button
             variant="outlined"
