@@ -1,10 +1,10 @@
 "use client"
 
 import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useSearchParams } from "react-router-dom"
 import { Container, Typography, TextField, Button, Box, Paper, Chip, Alert } from "@mui/material"
 import { motion, AnimatePresence } from "framer-motion"
-import { Key, Lightbulb } from "lucide-react"
+import { Lock, Key, Lightbulb } from "lucide-react"
 
 function ExtraStep3() {
   const navigate = useNavigate()
@@ -12,6 +12,41 @@ function ExtraStep3() {
   const [answer, setAnswer] = useState("")
   const [wrongAnswerError, setWrongAnswerError] = useState("")
   const [buttonMessage, setButtonMessage] = useState("")
+  const [searchParams] = useSearchParams()
+  const stateParam = searchParams.get("state")
+
+
+  // URLエラーの場合
+  if (stateParam !== "タコ型エイリアン") {
+    return (
+      <Box
+        sx={{
+          minHeight: "100vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          background: "linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #2563eb 100%)",
+        }}
+      >
+        <Container maxWidth="sm">
+          <Paper
+            elevation={8}
+            sx={{
+              p: 4,
+              textAlign: "center",
+              borderRadius: 3,
+              background: "rgba(255, 255, 255, 0.95)",
+            }}
+          >
+            <Lock size={48} color="#e74c3c" style={{ marginBottom: "16px" }} />
+            <Typography variant="h6" color="error" gutterBottom>
+              URLが間違っています。正しいURLでアクセスしてください。
+            </Typography>
+          </Paper>
+        </Container>
+      </Box>
+    )
+  }
 
   // 出題文
   const question = pushed ? "本公演のハッシュタグは？" : "譁�ｭ怜喧縺代ヱ繧ｿ繝ｼ繝ｳ"
