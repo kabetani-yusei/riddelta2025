@@ -1,4 +1,3 @@
-import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Epilogue from "../pages/Epilogue.tsx";
 import ExtraStep1 from "../pages/ExtraStep1.tsx";

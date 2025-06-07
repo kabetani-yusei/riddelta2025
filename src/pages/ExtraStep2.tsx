@@ -123,7 +123,7 @@ function ExtraStep2() {
   }
 
   // ボタンクリック時の処理
-  const handleButtonClick = (colorName: string) => {
+  const handleButtonClick = () => {
     setButtonMessage("なんとなくだが押すのをやめておこう")
     // 3秒後にメッセージを消す
     setTimeout(() => {
@@ -326,7 +326,7 @@ function ExtraStep2() {
                     transition={{ delay: 0.8 + idx * 0.1, duration: 0.3 }}
                   >
                     <Box
-                      onClick={() => handleButtonClick(btn.name)}
+                      onClick={() => handleButtonClick()}
                       sx={{
                         width: 48,
                         height: 48,

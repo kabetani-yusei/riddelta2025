@@ -25,7 +25,7 @@ function ExtraStep3() {
   }
 
   // ボタンクリック時の処理
-  const handleButtonClick = (idx: number, colorName: string) => {
+  const handleButtonClick = (idx: number) => {
     if (idx === 4) {
       // 紫色のボタン（5番目）の場合
       setPushed(true)
@@ -241,7 +241,7 @@ function ExtraStep3() {
                     transition={{ delay: 0.8 + idx * 0.1, duration: 0.3 }}
                   >
                     <Box
-                      onClick={() => handleButtonClick(idx, btn.name)}
+                      onClick={() => handleButtonClick(idx)}
                       sx={{
                         width: 48,
                         height: 48,
