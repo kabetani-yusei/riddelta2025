@@ -121,18 +121,6 @@ function ExtraStep1() {
 
             {/* Instructions */}
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4, duration: 0.6 }}>
-              <Alert
-                severity="info"
-                sx={{
-                  mb: 3,
-                  borderRadius: 2,
-                  "& .MuiAlert-message": {
-                    fontSize: "0.95rem",
-                  },
-                }}
-              >
-                このおまけ謎は、謎解きが得意な方々からの「時間が余って暇」という要望を受けて 急遽作成したものです。
-              </Alert>
 
               <Alert
                 severity="warning"
@@ -145,7 +133,7 @@ function ExtraStep1() {
                   },
                 }}
               >
-                金曜日、土曜日の公演では実施していないため、 Xなどでのおまけ謎に関する言及はお控えください。
+                SNS等において、こちらのおまけ謎についての言及はお控えください
               </Alert>
             </motion.div>
 

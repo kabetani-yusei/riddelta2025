@@ -99,19 +99,6 @@ export default function Clear() {
 
             {/* Content Section */}
             <Box sx={{ p: 4 }}>
-              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }}>
-                <Typography
-                  variant="body1"
-                  sx={{
-                    mb: 3,
-                    lineHeight: 1.8,
-                    color: "text.secondary",
-                    fontSize: "1.1rem",
-                  }}
-                >
-                  このおまけ謎は、謎解きが得意な方々からの「時間が余って暇」という要望を受けて 急遽作成したものです。
-                </Typography>
-              </motion.div>
 
               <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.6 }}>
                 <Alert
@@ -124,7 +111,7 @@ export default function Clear() {
                     },
                   }}
                 >
-                  金曜日、土曜日の公演では実施していないため、 Xなどでのおまけ謎に関する言及はお控えください。
+                  SNS等において、こちらのおまけ謎についての言及はお控えください
                 </Alert>
               </motion.div>
             </Box>
