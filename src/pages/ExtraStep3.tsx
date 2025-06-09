@@ -420,32 +420,6 @@ function ExtraStep3() {
                 </Accordion>
               </Box>
             </motion.div>
-
-            {/* Decorative elements */}
-            <Box
-              sx={{
-                position: "absolute",
-                top: 20,
-                right: 20,
-                opacity: 0.1,
-                fontSize: "3rem",
-                color: "#2563eb",
-              }}
-            >
-              🔍
-            </Box>
-            <Box
-              sx={{
-                position: "absolute",
-                bottom: 20,
-                left: 20,
-                opacity: 0.1,
-                fontSize: "3rem",
-                color: "#d4af37",
-              }}
-            >
-              🧩
-            </Box>
           </Paper>
         </motion.div>
       </Container>
