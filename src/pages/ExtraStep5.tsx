@@ -2,20 +2,22 @@
 
 import { useState } from "react"
 import { useNavigate, useSearchParams } from "react-router-dom"
-import { Container, Typography, TextField, Button, Box, Paper, Alert, Chip } from "@mui/material"
-import { motion } from "framer-motion"
+import { Container, Typography, TextField, Button, Box, Paper, Chip, Alert } from "@mui/material"
+import { motion, AnimatePresence } from "framer-motion"
 import { Lock, Key, Lightbulb } from "lucide-react"
-import step1Image from "../assets/step1-extra.png"
 
-function ExtraStep1() {
+function ExtraStep5() {
   const navigate = useNavigate()
-  const [searchParams] = useSearchParams()
-  const stateParam = searchParams.get("state")
+  const [pushed, setPushed] = useState(false)
   const [answer, setAnswer] = useState("")
   const [wrongAnswerError, setWrongAnswerError] = useState("")
+  const [buttonMessage, setButtonMessage] = useState("")
+  const [searchParams] = useSearchParams()
+  const stateParam = searchParams.get("state")
 
-  // クエリパラメータチェック
-  if (stateParam !== "公演開始直後") {
+
+  // URLエラーの場合
+  if (stateParam !== "タコ型エイリアン") {
     return (
       <Box
         sx={{
@@ -46,17 +48,45 @@ function ExtraStep1() {
     )
   }
 
-  // ひらがなのみかを判定
-  const hiraganaRegex = /^[ぁ-ん]+$/
-  const inputError = answer !== "" && !hiraganaRegex.test(answer)
+  // 出題文
+  const question = pushed ? "本公演のハッシュタグは？" : "諢丞袖荳肴�縺ｪ譁�ｭ怜�"
 
   const handleSubmit = () => {
-    if (answer === "BROWN" || answer === "ぶらうん" || answer === "ブラウン" || answer === "ちゃいろ" || answer === "茶色") {
-      navigate("/extra-step2?state=2つ目の惑星")
+    if (answer === "宇宙秘宝脱出" || answer === "#宇宙秘宝脱出" || answer === "＃宇宙秘宝脱出") {
+      navigate("/clear")
     } else {
       setWrongAnswerError("答えが違うみたいです")
     }
   }
+
+  // ボタンクリック時の処理
+  const handleButtonClick = (idx: number) => {
+    if (idx === 4) {
+      // 紫色のボタン（5番目）の場合
+      setPushed(true)
+    } else {
+      // その他のボタンの場合
+      setButtonMessage("なんとなくだが押すのをやめておこう")
+      // 3秒後にメッセージを消す
+      setTimeout(() => {
+        setButtonMessage("")
+      }, 3000)
+    }
+  }
+
+  // 色リスト (5番目は紫)
+  const colorButtons = [
+    { color: "#ffffff", shadow: "rgba(0, 0, 0, 0.3)", name: "白" },
+    { color: "#ffff00", shadow: "rgba(255, 255, 0, 0.4)", name: "黄" },
+    { color: "#ffa500", shadow: "rgba(255, 165, 0, 0.4)", name: "橙" },
+    { color: "#000000", shadow: "rgba(0, 0, 0, 0.6)", name: "黒" },
+    { color: "#800080", shadow: "rgba(128, 0, 128, 0.4)", name: "紫" }, // 紫色のボタン
+    { color: "#00ffff", shadow: "rgba(0, 255, 255, 0.4)", name: "水色" },
+    { color: "#00ff00", shadow: "rgba(0, 255, 0, 0.4)", name: "緑" },
+    { color: "#ff0000", shadow: "rgba(255, 0, 0, 0.4)", name: "赤" },
+    { color: "#a52a2a", shadow: "rgba(165, 42, 42, 0.4)", name: "茶" },
+    { color: "#808080", shadow: "rgba(128, 128, 128, 0.4)", name: "灰" },
+  ]
 
   return (
     <Box
@@ -119,29 +149,11 @@ function ExtraStep1() {
               </motion.div>
             </Box>
 
-            {/* Instructions */}
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4, duration: 0.6 }}>
-
-              <Alert
-                severity="warning"
-                sx={{
-                  mb: 4,
-                  borderRadius: 2,
-                  "& .MuiAlert-message": {
-                    fontSize: "0.95rem",
-                    fontWeight: 500,
-                  },
-                }}
-              >
-                SNS等において、こちらのおまけ謎についての言及はお控えください
-              </Alert>
-            </motion.div>
-
             {/* Puzzle Section */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6, duration: 0.6 }}
+              transition={{ delay: 0.4, duration: 0.6 }}
             >
               <Paper
                 elevation={4}
@@ -159,49 +171,164 @@ function ExtraStep1() {
                 <Typography
                   variant="h6"
                   sx={{
-                    mb: 3,
+                    mb: 2,
                     fontWeight: 300,
                     textShadow: "0 1px 2px rgba(0,0,0,0.3)",
                   }}
                 >
-                  ？に入る文字をひらがなで答えよ
+                  以下の問に答えよ
                 </Typography>
-
-                {/* Puzzle Image */}
                 <Box
                   sx={{
                     p: 3,
-                    backgroundColor: "rgba(255, 255, 255, 0.95)",
+                    backgroundColor: "rgba(255, 255, 255, 0.2)",
                     borderRadius: 2,
                     backdropFilter: "blur(10px)",
                     border: "1px solid rgba(255, 255, 255, 0.3)",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
                   }}
                 >
-                  <img
-                    src={step1Image}
-                    style={{
-                      maxWidth: "100%",
-                      height: "auto",
-                      borderRadius: "8px",
-                      boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
-                    }}
-                  />
+                  <motion.div
+                    key={question}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.5 }}
+                  >
+                    <Typography
+                      variant="h4"
+                      sx={{
+                        fontFamily: "'Courier New', monospace",
+                        fontWeight: "bold",
+                        letterSpacing: "0.1em",
+                        textShadow: "0 2px 4px rgba(0,0,0,0.3)",
+                      }}
+                    >
+                      {question}
+                    </Typography>
+                  </motion.div>
                 </Box>
               </Paper>
+            </motion.div>
+
+            {/* Button Message */}
+            <AnimatePresence>
+              {buttonMessage && (
+                <motion.div
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <Alert
+                    severity="warning"
+                    sx={{
+                      mb: 3,
+                      borderRadius: 2,
+                      backgroundColor: "#fff3cd",
+                      border: "1px solid #ffeaa7",
+                      "& .MuiAlert-message": {
+                        fontSize: "1rem",
+                        fontWeight: 500,
+                        color: "#856404",
+                      },
+                    }}
+                  >
+                    {buttonMessage}
+                  </Alert>
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            {/* Color Buttons Section */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6, duration: 0.6 }}
+            >
+              <Typography
+                variant="h6"
+                sx={{
+                  textAlign: "center",
+                  mb: 3,
+                  color: "#1e40af",
+                  fontWeight: "bold",
+                }}
+              >
+                ボタン
+              </Typography>
+              <Box
+                sx={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  justifyContent: "center",
+                  gap: 2,
+                  mb: 4,
+                  p: 3,
+                  backgroundColor: "#f8f9fa",
+                  borderRadius: 3,
+                  border: "2px solid #e9ecef",
+                }}
+              >
+                {colorButtons.map((btn, idx) => (
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.8 + idx * 0.1, duration: 0.3 }}
+                  >
+                    <Box
+                      onClick={() => handleButtonClick(idx)}
+                      sx={{
+                        width: 48,
+                        height: 48,
+                        backgroundColor: btn.color,
+                        borderRadius: "50%",
+                        border: btn.color === "#ffffff" ? "2px solid #dee2e6" : "2px solid rgba(0,0,0,0.1)",
+                        boxShadow: `
+                          0 4px 8px ${btn.shadow},
+                          inset 0 2px 4px rgba(255,255,255,0.3),
+                          inset 0 -2px 4px rgba(0,0,0,0.2)
+                        `,
+                        cursor: "pointer",
+                        transition: "all 0.2s ease",
+                        position: "relative",
+                        // 紫色のボタンのみ特別なスタイル
+                        ...(idx === 4 && {
+                          "&:active": {
+                            transform: "translateY(0px)",
+                            boxShadow: `
+                              0 2px 4px ${btn.shadow},
+                              inset 0 2px 6px rgba(0,0,0,0.3)
+                            `,
+                          },
+                        }),
+                        "&::after": {
+                          content: '""',
+                          position: "absolute",
+                          top: "15%",
+                          left: "20%",
+                          width: "30%",
+                          height: "30%",
+                          backgroundColor: "rgba(255,255,255,0.4)",
+                          borderRadius: "50%",
+                          filter: "blur(2px)",
+                        },
+                      }}
+                      title={btn.name}
+                    />
+                  </motion.div>
+                ))}
+              </Box>
             </motion.div>
 
             {/* Answer Section */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.8, duration: 0.6 }}
+              transition={{ delay: 1.2, duration: 0.6 }}
             >
               <Box sx={{ mb: 3 }}>
                 <TextField
-                  label="回答をひらがなで入力"
+                  label="回答を入力"
                   variant="outlined"
                   fullWidth
                   value={answer}
@@ -209,10 +336,8 @@ function ExtraStep1() {
                     setAnswer(e.target.value)
                     if (wrongAnswerError) setWrongAnswerError("")
                   }}
-                  error={inputError || Boolean(wrongAnswerError)}
-                  helperText={
-                    inputError ? "すべてひらがなで入力してください" : wrongAnswerError ? wrongAnswerError : "\u00A0"
-                  }
+                  error={Boolean(wrongAnswerError)}
+                  helperText={wrongAnswerError || "\u00A0"}
                   sx={{
                     "& .MuiOutlinedInput-root": {
                       borderRadius: 2,
@@ -236,7 +361,7 @@ function ExtraStep1() {
                   variant="contained"
                   size="large"
                   onClick={handleSubmit}
-                  disabled={answer === "" || inputError}
+                  disabled={answer === ""}
                   sx={{
                     px: 4,
                     py: 1.5,
@@ -273,7 +398,7 @@ function ExtraStep1() {
                 color: "#2563eb",
               }}
             >
-              🔍
+              🎯
             </Box>
             <Box
               sx={{
@@ -285,7 +410,7 @@ function ExtraStep1() {
                 color: "#d4af37",
               }}
             >
-              🧩
+              🔧
             </Box>
           </Paper>
         </motion.div>
@@ -294,4 +419,4 @@ function ExtraStep1() {
   )
 }
 
-export default ExtraStep1
+export default ExtraStep5

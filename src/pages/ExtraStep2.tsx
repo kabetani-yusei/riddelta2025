@@ -2,87 +2,20 @@
 
 import { useState } from "react"
 import { useNavigate, useSearchParams } from "react-router-dom"
-import { Container, Typography, TextField, Button, Box, Paper, Chip, Alert } from "@mui/material"
-import { motion, AnimatePresence } from "framer-motion"
-import { Lock, Key, Lightbulb, CheckCircle } from "lucide-react"
+import { Container, Typography, TextField, Button, Box, Paper, Alert, Chip } from "@mui/material"
+import { motion } from "framer-motion"
+import { Lock, Key, Lightbulb } from "lucide-react"
+import step2Image from "../assets/step2-extra.png"
 
 function ExtraStep2() {
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
-  const placeParam = searchParams.get("place")
+  const stateParam = searchParams.get("state")
   const [answer, setAnswer] = useState("")
   const [wrongAnswerError, setWrongAnswerError] = useState("")
-  const [buttonMessage, setButtonMessage] = useState("")
 
-  // placeParamチェック - シャワー室の場合
-  if (placeParam?.includes("シャワー")) {
-    return (
-      <Box
-        sx={{
-          minHeight: "100vh",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          background: "linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #2563eb 100%)",
-        }}
-      >
-        <Container maxWidth="sm">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6 }}
-          >
-            <Paper
-              elevation={8}
-              sx={{
-                p: 4,
-                textAlign: "center",
-                borderRadius: 3,
-                background: "linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%)",
-              }}
-            >
-              <CheckCircle size={64} color="#10b981" style={{ marginBottom: "16px" }} />
-              <Typography
-                variant="h4"
-                sx={{
-                  color: "#10b981",
-                  fontWeight: "bold",
-                  mb: 3,
-                }}
-              >
-                擬態が解けた！
-              </Typography>
-              <Button
-                variant="contained"
-                size="large"
-                onClick={() => navigate("/extra-step3?state=タコ型エイリアン")}
-                sx={{
-                  px: 4,
-                  py: 1.5,
-                  borderRadius: 3,
-                  background: "linear-gradient(45deg, #d4af37 30%, #ffd700 90%)",
-                  color: "#1e40af",
-                  fontSize: "1.1rem",
-                  fontWeight: "bold",
-                  textTransform: "none",
-                  boxShadow: "0 4px 15px rgba(212, 175, 55, 0.4)",
-                  "&:hover": {
-                    background: "linear-gradient(45deg, #b8941f 30%, #e6c200 90%)",
-                    boxShadow: "0 6px 20px rgba(212, 175, 55, 0.6)",
-                  },
-                }}
-              >
-                戻る
-              </Button>
-            </Paper>
-          </motion.div>
-        </Container>
-      </Box>
-    )
-  }
-
-  // URLエラーの場合
-  if (placeParam !== "ボタン式制御室") {
+  // クエリパラメータチェック
+  if (stateParam !== "2つ目の惑星") {
     return (
       <Box
         sx={{
@@ -113,37 +46,17 @@ function ExtraStep2() {
     )
   }
 
-  // 通常のUI
+  // ひらがなのみかを判定
+  const hiraganaRegex = /^[ぁ-ん]+$/
+  const inputError = answer !== "" && !hiraganaRegex.test(answer)
+
   const handleSubmit = () => {
-    if (answer === "宇宙秘宝脱出" || answer === "#宇宙秘宝脱出" || answer === "＃宇宙秘宝脱出") {
-      navigate("/clear")
+    if (answer === "たから") {
+      navigate("/extra-step3?state=3つ目の惑星")
     } else {
       setWrongAnswerError("答えが違うみたいです")
     }
   }
-
-  // ボタンクリック時の処理
-  const handleButtonClick = () => {
-    setButtonMessage("なんとなくだが押すのをやめておこう")
-    // 3秒後にメッセージを消す
-    setTimeout(() => {
-      setButtonMessage("")
-    }, 3000)
-  }
-
-  // 色リスト（より立体的なボタン用）
-  const colorButtons = [
-    { color: "#ffffff", shadow: "rgba(0, 0, 0, 0.3)", name: "白" },
-    { color: "#ffff00", shadow: "rgba(255, 255, 0, 0.4)", name: "黄" },
-    { color: "#ffa500", shadow: "rgba(255, 165, 0, 0.4)", name: "橙" },
-    { color: "#000000", shadow: "rgba(0, 0, 0, 0.6)", name: "黒" },
-    { color: "#0000ff", shadow: "rgba(0, 0, 255, 0.4)", name: "青" },
-    { color: "#00ffff", shadow: "rgba(0, 255, 255, 0.4)", name: "水色" },
-    { color: "#00ff00", shadow: "rgba(0, 255, 0, 0.4)", name: "緑" },
-    { color: "#ff0000", shadow: "rgba(255, 0, 0, 0.4)", name: "赤" },
-    { color: "#a52a2a", shadow: "rgba(165, 42, 42, 0.4)", name: "茶" },
-    { color: "#808080", shadow: "rgba(128, 128, 128, 0.4)", name: "灰" },
-  ]
 
   return (
     <Box
@@ -206,11 +119,29 @@ function ExtraStep2() {
               </motion.div>
             </Box>
 
+            {/* Instructions */}
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4, duration: 0.6 }}>
+
+              <Alert
+                severity="warning"
+                sx={{
+                  mb: 4,
+                  borderRadius: 2,
+                  "& .MuiAlert-message": {
+                    fontSize: "0.95rem",
+                    fontWeight: 500,
+                  },
+                }}
+              >
+                SNS等において、こちらのおまけ謎についての言及はお控えください
+              </Alert>
+            </motion.div>
+
             {/* Puzzle Section */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.6 }}
+              transition={{ delay: 0.6, duration: 0.6 }}
             >
               <Paper
                 elevation={4}
@@ -228,135 +159,49 @@ function ExtraStep2() {
                 <Typography
                   variant="h6"
                   sx={{
-                    mb: 2,
+                    mb: 3,
                     fontWeight: 300,
                     textShadow: "0 1px 2px rgba(0,0,0,0.3)",
                   }}
                 >
-                  以下の問に答えよ
+                  ？に入る文字をひらがなで答えよ
                 </Typography>
+
+                {/* Puzzle Image */}
                 <Box
                   sx={{
                     p: 3,
-                    backgroundColor: "rgba(255, 255, 255, 0.2)",
+                    backgroundColor: "rgba(255, 255, 255, 0.95)",
                     borderRadius: 2,
                     backdropFilter: "blur(10px)",
                     border: "1px solid rgba(255, 255, 255, 0.3)",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
                   }}
                 >
-                  <Typography
-                    variant="h4"
-                    sx={{
-                      fontFamily: "'Courier New', monospace",
-                      fontWeight: "bold",
-                      letterSpacing: "0.1em",
-                      textShadow: "0 2px 4px rgba(0,0,0,0.3)",
+                  <img
+                    src={step2Image}
+                    style={{
+                      maxWidth: "100%",
+                      height: "auto",
+                      borderRadius: "8px",
+                      boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
                     }}
-                  >
-                    譁�ｭ怜喧縺代ヱ繧ｿ繝ｼ繝ｳ
-                  </Typography>
+                  />
                 </Box>
               </Paper>
-            </motion.div>
-
-            {/* Button Message */}
-            <AnimatePresence>
-              {buttonMessage && (
-                <motion.div
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <Alert
-                    severity="warning"
-                    sx={{
-                      mb: 3,
-                      borderRadius: 2,
-                      backgroundColor: "#fff3cd",
-                      border: "1px solid #ffeaa7",
-                      "& .MuiAlert-message": {
-                        fontSize: "1rem",
-                        fontWeight: 500,
-                        color: "#856404",
-                      },
-                    }}
-                  >
-                    {buttonMessage}
-                  </Alert>
-                </motion.div>
-              )}
-            </AnimatePresence>
-
-            {/* Color Buttons Section */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6, duration: 0.6 }}
-            >
-              <Typography
-                variant="h6"
-                sx={{
-                  textAlign: "center",
-                  mb: 3,
-                  color: "#1e40af",
-                  fontWeight: "bold",
-                }}
-              >
-                ボタン
-              </Typography>
-              <Box
-                sx={{
-                  display: "flex",
-                  flexWrap: "wrap",
-                  justifyContent: "center",
-                  gap: 2,
-                  mb: 4,
-                  p: 3,
-                  backgroundColor: "#f8f9fa",
-                  borderRadius: 3,
-                  border: "2px solid #e9ecef",
-                }}
-              >
-                {colorButtons.map((btn, idx) => (
-                  <motion.div
-                    key={idx}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.8 + idx * 0.1, duration: 0.3 }}
-                  >
-                    <Box
-                      onClick={() => handleButtonClick()}
-                      sx={{
-                        width: 48,
-                        height: 48,
-                        backgroundColor: btn.color,
-                        borderRadius: "50%",
-                        border: btn.color === "#ffffff" ? "2px solid #dee2e6" : "2px solid rgba(0,0,0,0.1)",
-                        boxShadow: `
-                          0 4px 8px ${btn.shadow},
-                          inset 0 2px 4px rgba(255,255,255,0.3),
-                          inset 0 -2px 4px rgba(0,0,0,0.2)
-                        `,
-                        cursor: "pointer",
-                        transition: "all 0.2s ease",
-                        position: "relative",
-                      }}
-                    />
-                  </motion.div>
-                ))}
-              </Box>
             </motion.div>
 
             {/* Answer Section */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.2, duration: 0.6 }}
+              transition={{ delay: 0.8, duration: 0.6 }}
             >
               <Box sx={{ mb: 3 }}>
                 <TextField
-                  label="回答を入力"
+                  label="回答をひらがなで入力"
                   variant="outlined"
                   fullWidth
                   value={answer}
@@ -364,8 +209,10 @@ function ExtraStep2() {
                     setAnswer(e.target.value)
                     if (wrongAnswerError) setWrongAnswerError("")
                   }}
-                  error={Boolean(wrongAnswerError)}
-                  helperText={wrongAnswerError || "\u00A0"}
+                  error={inputError || Boolean(wrongAnswerError)}
+                  helperText={
+                    inputError ? "すべてひらがなで入力してください" : wrongAnswerError ? wrongAnswerError : "\u00A0"
+                  }
                   sx={{
                     "& .MuiOutlinedInput-root": {
                       borderRadius: 2,
@@ -389,7 +236,7 @@ function ExtraStep2() {
                   variant="contained"
                   size="large"
                   onClick={handleSubmit}
-                  disabled={answer === ""}
+                  disabled={answer === "" || inputError}
                   sx={{
                     px: 4,
                     py: 1.5,
@@ -426,7 +273,7 @@ function ExtraStep2() {
                 color: "#2563eb",
               }}
             >
-              🎯
+              🔍
             </Box>
             <Box
               sx={{
@@ -438,7 +285,7 @@ function ExtraStep2() {
                 color: "#d4af37",
               }}
             >
-              🔧
+              🧩
             </Box>
           </Paper>
         </motion.div>

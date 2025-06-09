@@ -101,18 +101,12 @@ export default function Clear() {
             <Box sx={{ p: 4 }}>
 
               <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.6 }}>
-                <Alert
-                  severity="warning"
-                  sx={{
-                    borderRadius: 2,
-                    "& .MuiAlert-message": {
-                      fontSize: "1rem",
-                      fontWeight: 500,
-                    },
-                  }}
-                >
-                  SNS等において、こちらのおまけ謎についての言及はお控えください
-                </Alert>
+                <Typography>
+                  託されし宇宙の秘宝からの脱出のすべての謎を解き明かした！
+                </Typography>
+                <button>
+                  共有する
+                </button>
               </motion.div>
             </Box>
           </Paper>
