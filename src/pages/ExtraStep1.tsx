@@ -2,9 +2,20 @@
 
 import { useState } from "react"
 import { useNavigate, useSearchParams } from "react-router-dom"
-import { Container, Typography, TextField, Button, Box, Paper, Chip } from "@mui/material"
+import {
+  Container,
+  Typography,
+  TextField,
+  Button,
+  Box,
+  Paper,
+  Chip,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+} from "@mui/material"
 import { motion } from "framer-motion"
-import { Lock, Key, Lightbulb } from "lucide-react"
+import { Lock, Key, Lightbulb, HelpCircle, ChevronDown } from "lucide-react"
 import step1Image from "../assets/step1-extra.png"
 
 function ExtraStep1() {
@@ -237,6 +248,194 @@ function ExtraStep1() {
                 >
                   解答する
                 </Button>
+              </Box>
+            </motion.div>
+
+            {/* Hints Section */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.0, duration: 0.6 }}
+            >
+              <Box sx={{ mb: 4 }}>
+                <Box display="flex" alignItems="center" mb={2}>
+                  <HelpCircle size={24} color="#2563eb" style={{ marginRight: "8px" }} />
+                  <Typography
+                    variant="h6"
+                    sx={{
+                      color: "#2563eb",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    ヒント
+                  </Typography>
+                </Box>
+
+                {/* Hint 1 */}
+                <Accordion
+                  sx={{
+                    mb: 1,
+                    borderRadius: 2,
+                    "&:before": {
+                      display: "none",
+                    },
+                    boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+                  }}
+                >
+                  <AccordionSummary
+                    expandIcon={<ChevronDown size={20} />}
+                    sx={{
+                      backgroundColor: "#f1f5f9",
+                      borderRadius: 2,
+                      "&:hover": {
+                        backgroundColor: "#e2e8f0",
+                      },
+                    }}
+                  >
+                    <Typography
+                      variant="body1"
+                      sx={{
+                        fontWeight: "500",
+                        color: "#334155",
+                      }}
+                    >
+                      ヒント1
+                    </Typography>
+                  </AccordionSummary>
+                  <AccordionDetails
+                    sx={{
+                      backgroundColor: "#ffffff",
+                      borderTop: "1px solid #e2e8f0",
+                    }}
+                  >
+                    <Typography
+                      variant="body2"
+                      sx={{
+                        lineHeight: 1.6,
+                        color: "#475569",
+                      }}
+                    >
+                      黄色の3がL、青色の4がE、赤色の3がDを表しています
+                    </Typography>
+                  </AccordionDetails>
+                </Accordion>
+
+                {/* Hint 2 */}
+                <Accordion
+                  sx={{
+                    mb: 1,
+                    borderRadius: 2,
+                    "&:before": {
+                      display: "none",
+                    },
+                    boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+                  }}
+                >
+                  <AccordionSummary
+                    expandIcon={<ChevronDown size={20} />}
+                    sx={{
+                      backgroundColor: "#f1f5f9",
+                      borderRadius: 2,
+                      "&:hover": {
+                        backgroundColor: "#e2e8f0",
+                      },
+                    }}
+                  >
+                    <Typography
+                      variant="body1"
+                      sx={{
+                        fontWeight: "500",
+                        color: "#334155",
+                      }}
+                    >
+                      ヒント2
+                    </Typography>
+                  </AccordionSummary>
+                  <AccordionDetails
+                    sx={{
+                      backgroundColor: "#ffffff",
+                      borderTop: "1px solid #e2e8f0",
+                    }}
+                  >
+                    <Typography
+                      variant="body2"
+                      sx={{
+                        lineHeight: 1.6,
+                        color: "#475569",
+                        mb: 1,
+                      }}
+                    >
+                      それぞれを英語にしてみましょう
+                    </Typography>
+                    <Box
+                      sx={{
+                        backgroundColor: "#f8fafc",
+                        p: 2,
+                        borderRadius: 1,
+                        border: "1px solid #e2e8f0",
+                      }}
+                    >
+                      <Typography variant="body2" sx={{ color: "#475569", fontFamily: "monospace" }}>
+                        青色: BLUE
+                        <br />
+                        赤色: RED
+                        <br />
+                        黄色: YELLOW
+                        <br />
+                        緑色: GREEN
+                      </Typography>
+                    </Box>
+                  </AccordionDetails>
+                </Accordion>
+
+                {/* Hint 3 */}
+                <Accordion
+                  sx={{
+                    mb: 1,
+                    borderRadius: 2,
+                    "&:before": {
+                      display: "none",
+                    },
+                    boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+                  }}
+                >
+                  <AccordionSummary
+                    expandIcon={<ChevronDown size={20} />}
+                    sx={{
+                      backgroundColor: "#f1f5f9",
+                      borderRadius: 2,
+                      "&:hover": {
+                        backgroundColor: "#e2e8f0",
+                      },
+                    }}
+                  >
+                    <Typography
+                      variant="body1"
+                      sx={{
+                        fontWeight: "500",
+                        color: "#334155",
+                      }}
+                    >
+                      ヒント3
+                    </Typography>
+                  </AccordionSummary>
+                  <AccordionDetails
+                    sx={{
+                      backgroundColor: "#ffffff",
+                      borderTop: "1px solid #e2e8f0",
+                    }}
+                  >
+                    <Typography
+                      variant="body2"
+                      sx={{
+                        lineHeight: 1.6,
+                        color: "#475569",
+                      }}
+                    >
+                      それぞれの色の、英単語の何文字目かを表しています
+                    </Typography>
+                  </AccordionDetails>
+                </Accordion>
               </Box>
             </motion.div>
 

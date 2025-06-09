@@ -2,9 +2,21 @@
 
 import { useState } from "react"
 import { useNavigate, useSearchParams } from "react-router-dom"
-import { Container, Typography, TextField, Button, Box, Paper, Chip, Alert } from "@mui/material"
+import {
+  Container,
+  Typography,
+  TextField,
+  Button,
+  Box,
+  Paper,
+  Chip,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+  Alert,
+} from "@mui/material"
 import { motion, AnimatePresence } from "framer-motion"
-import { Lock, Key, Lightbulb, CheckCircle } from "lucide-react"
+import { Lock, Key, Lightbulb, HelpCircle, CheckCircle, ChevronDown } from "lucide-react"
 
 function ExtraStep4() {
   const navigate = useNavigate()
@@ -412,6 +424,179 @@ function ExtraStep4() {
                 >
                   解答する
                 </Button>
+              </Box>
+            </motion.div>
+
+            {/* Hints Section */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.0, duration: 0.6 }}
+            >
+              <Box sx={{ mb: 4 }}>
+                <Box display="flex" alignItems="center" mb={2}>
+                  <HelpCircle size={24} color="#2563eb" style={{ marginRight: "8px" }} />
+                  <Typography
+                    variant="h6"
+                    sx={{
+                      color: "#2563eb",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    ヒント
+                  </Typography>
+                </Box>
+
+                {/* Hint 1 */}
+                <Accordion
+                  sx={{
+                    mb: 1,
+                    borderRadius: 2,
+                    "&:before": {
+                      display: "none",
+                    },
+                    boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+                  }}
+                >
+                  <AccordionSummary
+                    expandIcon={<ChevronDown size={20} />}
+                    sx={{
+                      backgroundColor: "#f1f5f9",
+                      borderRadius: 2,
+                      "&:hover": {
+                        backgroundColor: "#e2e8f0",
+                      },
+                    }}
+                  >
+                    <Typography
+                      variant="body1"
+                      sx={{
+                        fontWeight: "500",
+                        color: "#334155",
+                      }}
+                    >
+                      ヒント1
+                    </Typography>
+                  </AccordionSummary>
+                  <AccordionDetails
+                    sx={{
+                      backgroundColor: "#ffffff",
+                      borderTop: "1px solid #e2e8f0",
+                    }}
+                  >
+                    <Typography
+                      variant="body2"
+                      sx={{
+                        lineHeight: 1.6,
+                        color: "#475569",
+                      }}
+                    >
+                      問が読めないので、紫色のボタンを押して修復する必要がありそうです<br />
+                      ただ、紫色のボタンが見当たりません
+                    </Typography>
+                  </AccordionDetails>
+                </Accordion>
+
+                {/* Hint 2 */}
+                <Accordion
+                  sx={{
+                    mb: 1,
+                    borderRadius: 2,
+                    "&:before": {
+                      display: "none",
+                    },
+                    boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+                  }}
+                >
+                  <AccordionSummary
+                    expandIcon={<ChevronDown size={20} />}
+                    sx={{
+                      backgroundColor: "#f1f5f9",
+                      borderRadius: 2,
+                      "&:hover": {
+                        backgroundColor: "#e2e8f0",
+                      },
+                    }}
+                  >
+                    <Typography
+                      variant="body1"
+                      sx={{
+                        fontWeight: "500",
+                        color: "#334155",
+                      }}
+                    >
+                      ヒント2
+                    </Typography>
+                  </AccordionSummary>
+                  <AccordionDetails
+                    sx={{
+                      backgroundColor: "#ffffff",
+                      borderTop: "1px solid #e2e8f0",
+                    }}
+                  >
+                    <Typography
+                      variant="body2"
+                      sx={{
+                        lineHeight: 1.6,
+                        color: "#475569",
+                        mb: 1,
+                      }}
+                    >
+                      擬態を解くためにはシャワーを浴びる必要があります<br />
+                      Web上でシャワー室に移動する方法を考えてみましょう
+                    </Typography>
+                  </AccordionDetails>
+                </Accordion>
+
+                {/* Hint 3 */}
+                <Accordion
+                  sx={{
+                    mb: 1,
+                    borderRadius: 2,
+                    "&:before": {
+                      display: "none",
+                    },
+                    boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+                  }}
+                >
+                  <AccordionSummary
+                    expandIcon={<ChevronDown size={20} />}
+                    sx={{
+                      backgroundColor: "#f1f5f9",
+                      borderRadius: 2,
+                      "&:hover": {
+                        backgroundColor: "#e2e8f0",
+                      },
+                    }}
+                  >
+                    <Typography
+                      variant="body1"
+                      sx={{
+                        fontWeight: "500",
+                        color: "#334155",
+                      }}
+                    >
+                      ヒント3
+                    </Typography>
+                  </AccordionSummary>
+                  <AccordionDetails
+                    sx={{
+                      backgroundColor: "#ffffff",
+                      borderTop: "1px solid #e2e8f0",
+                    }}
+                  >
+                    <Typography
+                      variant="body2"
+                      sx={{
+                        lineHeight: 1.6,
+                        color: "#475569",
+                      }}
+                    >
+                      おまけ謎のURLでは、state=公演開始直後のように情報が含まれていました<br />
+                      現在のURLはどうなっているか確認してみましょう
+                    </Typography>
+                  </AccordionDetails>
+                </Accordion>
               </Box>
             </motion.div>
 
