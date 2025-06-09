@@ -46,12 +46,8 @@ function ExtraStep1() {
     )
   }
 
-  // ひらがなのみかを判定
-  const hiraganaRegex = /^[ぁ-ん]+$/
-  const inputError = answer !== "" && !hiraganaRegex.test(answer)
-
   const handleSubmit = () => {
-    if (answer === "BROWN" || answer === "ぶらうん" || answer === "ブラウン" || answer === "ちゃいろ" || answer === "茶色") {
+    if (answer === "BROWN" || answer === "ぶらうん" || answer === "ブラウン" || answer === "brown") {
       navigate("/extra-step2?state=2つ目の惑星")
     } else {
       setWrongAnswerError("答えが違うみたいです")
@@ -133,7 +129,7 @@ function ExtraStep1() {
                   },
                 }}
               >
-                SNS等において、こちらのおまけ謎についての言及はお控えください
+                おまけ謎には、公演に参加していないと解けない謎が含まれています
               </Alert>
             </motion.div>
 
@@ -157,14 +153,14 @@ function ExtraStep1() {
               >
                 <Lightbulb size={32} style={{ marginBottom: "16px", opacity: 0.9 }} />
                 <Typography
-                  variant="h6"
+                  variant="h4"
                   sx={{
                     mb: 3,
                     fontWeight: 300,
                     textShadow: "0 1px 2px rgba(0,0,0,0.3)",
                   }}
                 >
-                  ？に入る文字をひらがなで答えよ
+                  「？」に入る英単語は何？
                 </Typography>
 
                 {/* Puzzle Image */}
@@ -201,7 +197,6 @@ function ExtraStep1() {
             >
               <Box sx={{ mb: 3 }}>
                 <TextField
-                  label="回答をひらがなで入力"
                   variant="outlined"
                   fullWidth
                   value={answer}
@@ -209,9 +204,9 @@ function ExtraStep1() {
                     setAnswer(e.target.value)
                     if (wrongAnswerError) setWrongAnswerError("")
                   }}
-                  error={inputError || Boolean(wrongAnswerError)}
+                  error={Boolean(wrongAnswerError)}
                   helperText={
-                    inputError ? "すべてひらがなで入力してください" : wrongAnswerError ? wrongAnswerError : "\u00A0"
+                    wrongAnswerError ? wrongAnswerError : "\u00A0"
                   }
                   sx={{
                     "& .MuiOutlinedInput-root": {
@@ -236,7 +231,7 @@ function ExtraStep1() {
                   variant="contained"
                   size="large"
                   onClick={handleSubmit}
-                  disabled={answer === "" || inputError}
+                  disabled={answer === ""}
                   sx={{
                     px: 4,
                     py: 1.5,

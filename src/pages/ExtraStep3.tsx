@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { useNavigate, useSearchParams } from "react-router-dom"
-import { Container, Typography, TextField, Button, Box, Paper, Alert, Chip } from "@mui/material"
+import { Container, Typography, TextField, Button, Box, Paper, Chip } from "@mui/material"
 import { motion } from "framer-motion"
 import { Lock, Key, Lightbulb } from "lucide-react"
 import step3Image from "../assets/step3-extra.png"
@@ -45,10 +45,6 @@ function ExtraStep3() {
       </Box>
     )
   }
-
-  // ひらがなのみかを判定
-  const hiraganaRegex = /^[ぁ-ん]+$/
-  const inputError = answer !== "" && !hiraganaRegex.test(answer)
 
   const handleSubmit = () => {
     if (answer === "せいちょう") {
@@ -119,24 +115,6 @@ function ExtraStep3() {
               </motion.div>
             </Box>
 
-            {/* Instructions */}
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4, duration: 0.6 }}>
-
-              <Alert
-                severity="warning"
-                sx={{
-                  mb: 4,
-                  borderRadius: 2,
-                  "& .MuiAlert-message": {
-                    fontSize: "0.95rem",
-                    fontWeight: 500,
-                  },
-                }}
-              >
-                SNS等において、こちらのおまけ謎についての言及はお控えください
-              </Alert>
-            </motion.div>
-
             {/* Puzzle Section */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -164,7 +142,7 @@ function ExtraStep3() {
                     textShadow: "0 1px 2px rgba(0,0,0,0.3)",
                   }}
                 >
-                  ？に入る文字をひらがなで答えよ
+                  「？」に入る単語は何？
                 </Typography>
 
                 {/* Puzzle Image */}
@@ -201,7 +179,6 @@ function ExtraStep3() {
             >
               <Box sx={{ mb: 3 }}>
                 <TextField
-                  label="回答をひらがなで入力"
                   variant="outlined"
                   fullWidth
                   value={answer}
@@ -209,9 +186,9 @@ function ExtraStep3() {
                     setAnswer(e.target.value)
                     if (wrongAnswerError) setWrongAnswerError("")
                   }}
-                  error={inputError || Boolean(wrongAnswerError)}
+                  error={Boolean(wrongAnswerError)}
                   helperText={
-                    inputError ? "すべてひらがなで入力してください" : wrongAnswerError ? wrongAnswerError : "\u00A0"
+                    wrongAnswerError ? wrongAnswerError : "\u00A0"
                   }
                   sx={{
                     "& .MuiOutlinedInput-root": {
@@ -236,7 +213,7 @@ function ExtraStep3() {
                   variant="contained"
                   size="large"
                   onClick={handleSubmit}
-                  disabled={answer === "" || inputError}
+                  disabled={answer === ""}
                   sx={{
                     px: 4,
                     py: 1.5,
