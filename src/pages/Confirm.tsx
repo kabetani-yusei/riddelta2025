@@ -2,12 +2,11 @@
 
 import { useState } from "react"
 import { useNavigate, useSearchParams } from "react-router-dom"
-import { Container, Typography, TextField, Button, Box, Paper, Chip } from "@mui/material"
+import { Container, Typography, TextField, Button, Box, Paper, Chip, Divider } from "@mui/material"
 import { motion } from "framer-motion"
-import { Lock, Key, Lightbulb } from "lucide-react"
-import step1Image from "../assets/step1-extra.png"
+import { Lock, Key, Users, MessageCircle, CheckCircle } from "lucide-react"
 
-function ExtraStep1() {
+function Confirm() {
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
   const stateParam = searchParams.get("state")
@@ -15,7 +14,7 @@ function ExtraStep1() {
   const [wrongAnswerError, setWrongAnswerError] = useState("")
 
   // クエリパラメータチェック
-  if (stateParam !== "1つ目の惑星") {
+  if (stateParam !== "公演開始直後") {
     return (
       <Box
         sx={{
@@ -47,8 +46,8 @@ function ExtraStep1() {
   }
 
   const handleSubmit = () => {
-    if (answer === "BROWN" || answer === "ぶらうん" || answer === "ブラウン" || answer === "brown") {
-      navigate("/extra-step2?state=2つ目の惑星")
+    if (answer === "こうはい" || answer === "後輩") {
+      navigate("/extra-step1?state=1つ目の惑星")
     } else {
       setWrongAnswerError("答えが違うみたいです")
     }
@@ -105,70 +104,135 @@ function ExtraStep1() {
                   おまけ謎
                 </Typography>
                 <Chip
-                  label="1st STEP"
+                  label="参加者確認"
                   sx={{
-                    background: "linear-gradient(45deg, #2563eb, #1d4ed8)",
-                    color: "white",
+                    background: "linear-gradient(45deg, #f59e0b, #fbbf24)",
+                    color: "#1e40af",
                     fontWeight: "bold",
                   }}
                 />
               </motion.div>
             </Box>
 
-            {/* Puzzle Section */}
+            {/* Instructions Section - White background with orange border */}
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4, duration: 0.6 }}>
+              <Paper
+                elevation={2}
+                sx={{
+                  p: 4,
+                  mb: 4,
+                  borderRadius: 3,
+                  background: "#ffffff",
+                  border: "2px solid #fdba74",
+                }}
+              >
+                <Box display="flex" alignItems="center" mb={2}>
+                  <Users size={24} color="#ea580c" style={{ marginRight: "8px" }} />
+                  <Typography
+                    variant="h6"
+                    sx={{
+                      color: "#ea580c",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    公演参加者限定
+                  </Typography>
+                </Box>
+
+                <Typography
+                  variant="body1"
+                  sx={{
+                    mb: 3,
+                    lineHeight: 1.8,
+                    color: "#374151",
+                    fontSize: "1rem",
+                  }}
+                >
+                  おまけ謎は、公演の参加者限定の謎となっております。
+                  公演に参加したか確認するために以下の問に答えてください。
+                </Typography>
+
+                <Divider sx={{ my: 2, borderColor: "#fdba74" }} />
+
+                <Box display="flex" alignItems="flex-start">
+                  <MessageCircle size={20} color="#ea580c" style={{ marginRight: "8px", marginTop: "2px" }} />
+                  <Box>
+                    <Typography
+                      variant="body2"
+                      sx={{
+                        color: "#374151",
+                        fontWeight: "bold",
+                        mb: 1,
+                      }}
+                    >
+                      お困りの場合は
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      sx={{
+                        color: "#374151",
+                        lineHeight: 1.6,
+                      }}
+                    >
+                      公演参加者で答えが分からない場合には、
+                      <Box
+                        component="span"
+                        sx={{
+                          fontWeight: "bold",
+                          color: "#ea580c",
+                        }}
+                      >
+                        リデルタ公式X: @NU_nazo_create
+                      </Box>
+                      までお問い合わせください。
+                    </Typography>
+                  </Box>
+                </Box>
+              </Paper>
+            </motion.div>
+
+            {/* Confirmation Question Section - Redesigned */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.6 }}
             >
-              <Paper
-                elevation={4}
+              <Box
                 sx={{
                   p: 4,
                   mb: 4,
                   borderRadius: 3,
-                  background: "linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%)",
-                  color: "white",
-                  textAlign: "center",
-                  position: "relative",
+                  background: "#f8fafc",
+                  border: "1px solid #2563eb",
+                  boxShadow: "0 2px 6px rgba(0,0,0,0.05)",
                 }}
               >
-                <Lightbulb size={32} style={{ marginBottom: "16px", opacity: 0.9 }} />
-                <Typography
-                  variant="h6"
-                  sx={{
-                    mb: 3,
-                    fontWeight: 300,
-                    textShadow: "0 1px 2px rgba(0,0,0,0.3)",
-                  }}
-                >
-                  「？」に入る英単語は何？
-                </Typography>
-
-                {/* Puzzle Image */}
-                <Box
-                  sx={{
-                    p: 3,
-                    backgroundColor: "rgba(255, 255, 255, 0.95)",
-                    borderRadius: 2,
-                    backdropFilter: "blur(10px)",
-                    border: "1px solid rgba(255, 255, 255, 0.3)",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  <img
-                    src={step1Image}
-                    style={{
-                      maxWidth: "100%",
-                      height: "auto",
-                      borderRadius: "8px",
-                      boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+                <Box display="flex" alignItems="center" mb={3}>
+                  <CheckCircle size={24} color="#2563eb" style={{ marginRight: "12px" }} />
+                  <Typography
+                    variant="h6"
+                    sx={{
+                      color: "#2563eb",
+                      fontWeight: "500",
                     }}
-                  />
+                  >
+                    参加確認
+                  </Typography>
                 </Box>
-              </Paper>
+
+                <Typography
+                  variant="body1"
+                  sx={{
+                    textAlign: "center",
+                    color: "#334155",
+                    fontSize: "1.1rem",
+                    fontWeight: "500",
+                    lineHeight: 1.6,
+                  }}
+                >
+                  チェックポイントにいた登場人物をひらがな4文字で答えてください
+                </Typography>
+              </Box>
             </motion.div>
 
             {/* Answer Section */}
@@ -188,9 +252,7 @@ function ExtraStep1() {
                     if (wrongAnswerError) setWrongAnswerError("")
                   }}
                   error={Boolean(wrongAnswerError)}
-                  helperText={
-                    wrongAnswerError ? wrongAnswerError : "\u00A0"
-                  }
+                  helperText={wrongAnswerError ? wrongAnswerError : "\u00A0"}
                   sx={{
                     "& .MuiOutlinedInput-root": {
                       borderRadius: 2,
@@ -272,4 +334,4 @@ function ExtraStep1() {
   )
 }
 
-export default ExtraStep1
+export default Confirm
