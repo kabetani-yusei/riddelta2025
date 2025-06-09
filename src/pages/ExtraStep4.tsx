@@ -16,7 +16,7 @@ import {
   Alert,
 } from "@mui/material"
 import { motion, AnimatePresence } from "framer-motion"
-import { Lock, Key, Lightbulb, HelpCircle, CheckCircle, ChevronDown } from "lucide-react"
+import { Lock, Key, Lightbulb, HelpCircle, CheckCircle, ChevronDown, FileText } from "lucide-react"
 
 function ExtraStep4() {
   const navigate = useNavigate()
@@ -360,6 +360,93 @@ function ExtraStep4() {
               </Box>
             </motion.div>
 
+            {/* Manual Section */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.0, duration: 0.6 }}
+            >
+              <Box sx={{ mb: 4 }}>
+                <Accordion
+                  sx={{
+                    borderRadius: 2,
+                    "&:before": {
+                      display: "none",
+                    },
+                    boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+                  }}
+                >
+                  <AccordionSummary
+                    expandIcon={<ChevronDown size={20} />}
+                    sx={{
+                      backgroundColor: "#f1f5f9",
+                      borderRadius: 2,
+                      "&:hover": {
+                        backgroundColor: "#e2e8f0",
+                      },
+                    }}
+                  >
+                    <Box display="flex" alignItems="center">
+                      <FileText size={20} color="#2563eb" style={{ marginRight: "8px" }} />
+                      <Typography
+                        variant="body1"
+                        sx={{
+                          fontWeight: "500",
+                          color: "#334155",
+                        }}
+                      >
+                        マニュアルはこちら
+                      </Typography>
+                    </Box>
+                  </AccordionSummary>
+                  <AccordionDetails
+                    sx={{
+                      backgroundColor: "#ffffff",
+                      borderTop: "1px solid #e2e8f0",
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        p: 3,
+                        backgroundColor: "#fffbeb",
+                        borderRadius: 2,
+                        border: "1px solid #fbbf24",
+                        position: "relative",
+                        "&::before": {
+                          content: '""',
+                          position: "absolute",
+                          top: 8,
+                          left: 8,
+                          width: 12,
+                          height: 12,
+                          backgroundColor: "#f59e0b",
+                          borderRadius: "50%",
+                          boxShadow: "0 2px 4px rgba(0,0,0,0.2)",
+                        },
+                      }}
+                    >
+                      <Typography
+                        variant="body2"
+                        sx={{
+                          fontFamily: "'Courier New', monospace",
+                          lineHeight: 2,
+                          color: "#92400e",
+                          fontSize: "0.9rem",
+                          pl: 3,
+                        }}
+                      >
+                        はいいろ・・・でんげんおふ
+                        <br />
+                        むらさき・・・しゅうふく
+                        <br />
+                        あかいろ・・・かくしきんこ
+                      </Typography>
+                    </Box>
+                  </AccordionDetails>
+                </Accordion>
+              </Box>
+            </motion.div>
+
             {/* Answer Section */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -491,7 +578,8 @@ function ExtraStep4() {
                         color: "#475569",
                       }}
                     >
-                      問が読めないので、紫色のボタンを押して修復する必要がありそうです<br />
+                      問が読めないので、紫色のボタンを押して修復する必要がありそうです
+                      <br />
                       ただ、紫色のボタンが見当たりません
                     </Typography>
                   </AccordionDetails>
@@ -542,7 +630,8 @@ function ExtraStep4() {
                         mb: 1,
                       }}
                     >
-                      擬態を解くためにはシャワーを浴びる必要があります<br />
+                      擬態を解くためにはシャワーを浴びる必要があります
+                      <br />
                       Web上でシャワー室に移動する方法を考えてみましょう
                     </Typography>
                   </AccordionDetails>
@@ -592,7 +681,8 @@ function ExtraStep4() {
                         color: "#475569",
                       }}
                     >
-                      おまけ謎のURLでは、state=公演開始直後のように情報が含まれていました<br />
+                      おまけ謎のURLでは、state=公演開始直後のように情報が含まれていました
+                      <br />
                       現在のURLはどうなっているか確認してみましょう
                     </Typography>
                   </AccordionDetails>
