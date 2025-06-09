@@ -109,10 +109,10 @@ function ExtraStep1() {
                   おまけ謎
                 </Typography>
                 <Chip
-                  label="EXTRA"
+                  label="1st STEP"
                   sx={{
-                    background: "linear-gradient(45deg, #d4af37, #ffd700)",
-                    color: "#1e40af",
+                    background: "linear-gradient(45deg, #2563eb, #1d4ed8)",
+                    color: "white",
                     fontWeight: "bold",
                   }}
                 />

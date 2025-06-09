@@ -196,7 +196,7 @@ function ExtraStep4() {
                   おまけ謎
                 </Typography>
                 <Chip
-                  label="EXTRA"
+                  label="FINAL STEP"
                   sx={{
                     background: "linear-gradient(45deg, #d4af37, #ffd700)",
                     color: "#1e40af",
