@@ -197,6 +197,7 @@ function ExtraStep1() {
             >
               <Box sx={{ mb: 3 }}>
                 <TextField
+                  label="解答を記入してください"
                   variant="outlined"
                   fullWidth
                   value={answer}
