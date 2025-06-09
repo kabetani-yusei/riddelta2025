@@ -139,7 +139,7 @@ export default function Clear() {
                     startIcon={<Share size={20} />}
                     onClick={() => {
                       const text = encodeURIComponent(
-                        "「託されし宇宙の秘宝からの脱出」のおまけ謎を完全に解き明かした！\n#リデルタ\n#宇宙秘宝脱出",
+                        "「託されし宇宙の秘宝からの脱出」のおまけ謎を完全に解き明かした！\n#リデルタ\n#宇宙秘宝脱出\n#宇宙秘宝脱出おまけ謎",
                       )
                       window.open(`https://twitter.com/intent/tweet?text=${text}`, "_blank")
                     }}
