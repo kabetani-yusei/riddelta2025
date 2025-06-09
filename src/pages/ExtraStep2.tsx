@@ -135,7 +135,7 @@ function ExtraStep2() {
               >
                 <Lightbulb size={32} style={{ marginBottom: "16px", opacity: 0.9 }} />
                 <Typography
-                  variant="h6"
+                  variant="h4"
                   sx={{
                     mb: 3,
                     fontWeight: 300,
