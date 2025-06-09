@@ -1,49 +1,15 @@
 "use client"
 
 import { useState } from "react"
-import { useNavigate, useSearchParams } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { Container, Typography, TextField, Button, Box, Paper, Chip, Divider } from "@mui/material"
 import { motion } from "framer-motion"
-import { Lock, Key, Users, MessageCircle, CheckCircle } from "lucide-react"
+import { Key, Users, MessageCircle, CheckCircle } from "lucide-react"
 
 function Confirm() {
   const navigate = useNavigate()
-  const [searchParams] = useSearchParams()
-  const stateParam = searchParams.get("state")
   const [answer, setAnswer] = useState("")
   const [wrongAnswerError, setWrongAnswerError] = useState("")
-
-  // クエリパラメータチェック
-  if (stateParam !== "公演開始直後") {
-    return (
-      <Box
-        sx={{
-          minHeight: "100vh",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          background: "linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #2563eb 100%)",
-        }}
-      >
-        <Container maxWidth="sm">
-          <Paper
-            elevation={8}
-            sx={{
-              p: 4,
-              textAlign: "center",
-              borderRadius: 3,
-              background: "rgba(255, 255, 255, 0.95)",
-            }}
-          >
-            <Lock size={48} color="#e74c3c" style={{ marginBottom: "16px" }} />
-            <Typography variant="h6" color="error" gutterBottom>
-              URLが間違っています。正しいURLでアクセスしてください。
-            </Typography>
-          </Paper>
-        </Container>
-      </Box>
-    )
-  }
 
   const handleSubmit = () => {
     if (answer === "こうはい" || answer === "後輩") {
@@ -148,7 +114,7 @@ function Confirm() {
                     fontSize: "1rem",
                   }}
                 >
-                  おまけ謎は、公演の参加者限定の謎となっております。
+                  「託されし宇宙の秘宝からの脱出」のおまけ謎は、公演の参加者限定の謎となっております。
                   公演に参加したか確認するために以下の問に答えてください。
                 </Typography>
 
